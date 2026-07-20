@@ -1,0 +1,27 @@
+# Attaches golden-path-probe to the MCP Gateway's `mcps` listener (same pattern as
+# projectboard-mcp): the broker routes per-tool MCP calls here.
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: golden-path-probe-route
+  namespace: agent-office
+  labels:
+    app.kubernetes.io/name: golden-path-probe
+    app.kubernetes.io/component: backend-route
+spec:
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: mcp-gateway
+      namespace: agent-office
+      sectionName: mcps
+  hostnames:
+    - golden-path-probe.mcp.local
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /mcp
+      backendRefs:
+        - name: golden-path-probe
+          port: 8080
