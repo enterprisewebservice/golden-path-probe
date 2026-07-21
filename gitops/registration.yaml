@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/name: golden-path-probe
     app.kubernetes.io/component: registration
 spec:
-  prefix: golden-path-probe_
+  prefix: golden_path_probe_
   path: /mcp
   targetRef:
     group: gateway.networking.k8s.io
