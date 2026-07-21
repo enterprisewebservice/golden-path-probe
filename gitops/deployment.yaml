@@ -16,6 +16,8 @@ spec:
       labels:
         app.kubernetes.io/name: golden-path-probe
     spec:
+      imagePullSecrets:
+        - name: quay-pull-secret
       containers:
         - name: golden-path-probe
           image: quay-quay-quay-test.apps.salamander.aimlworkbench.com/deanpeterson/golden-path-probe:main
